@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial;
+            padding: 10px;
+            background: #f1f1f1;
+        }
+        /* Header/Blog Title */
+        .header {
+            padding: 30px;
+            text-align: center;
+            background: white;
+        }
+        .header h1 {
+            font-size: 50px;
+        }
+        /* Style the top navigation bar */
+
+
+        /* Style the topnav links */
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+            list-style-type: none;
+        }
+
+        /* Change color on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        #script_picture {
+            position: relative;
+            max-width:100%;
+            max-hgight:100%;
+            width:auto; height:auto;
+            left:0px;
+            background-size:contain;
+
+
+        }
+
+        .main_menu > li > a{
+        {#display: inline-block;#}
+        {#padding: 14px 16px;#}
+        {#text-decoration: none;#}
+            display:block;
+            padding:8px 16px;
+            text-align:center;
+            font-size:0.85rem;
+            color:rgb(255,255,255);
+            text-align:center;
+            text-decoreation:none;
+            letter-spacing:0.05em;
+            display:block;
+            padding:12px 36px;
+            border-right:1px solid rgb(255,255,255);
+        }
+        .main_menu > li{
+            float: left;
+            border: 1px solid white;
+        }
+        .sub_menu, .main_menu{
+        {#list-style-type: none;#}
+        {#opacity:0;#}
+        {#width:100px;#}
+        {#background:black;#}
+        {#display : inline-block;#}
+        {#padding:5px 10px;#}
+        {##}
+            margin: 0;
+            padding: 0;
+            list-style-type:none;
+        }
+        .sub_menu {
+            position:absolute;
+            background: #828282;
+            opacity:0;
+            visibility:hidden;
+        }
+        .sub_menu > li{
+            padding:16px 28px;
+            border-bottom: 1px solid rgb(0,0,0);
+        }
+        .sub_menu > li > a{
+            color: rgb(255,255,255);
+            text-decoration:none;
+        }
+
+
+        .main_menu > li:hover ul.sub_menu{
+            opacity:1;
+            visibility:visible;
+            display:inline-block;
+        }
+
+        /* Create two unequal columns that floats next to each other */
+        /* Left column */
+        .whole{
+            align-items:center;
+            justify-content:center;
+            display:-webkit-flex;
+            -webkit-align-item:center;
+            -webkit-justify-content:center;
+        }
+
+        .contain-object{
+            width: 1050px;
+
+            align-items:center;
+        }
+
+
+        .leftcolumn {
+            float: left;
+            width: 75%;
+        }
+        /* Right column */
+        .rightcolumn {
+            float: left;
+            width: 25%;
+            background-color: #f1f1f1;
+            padding-left: 20px;
+        }
+        /* Fake image */
+        .fakeimg {
+            background-color: #aaa;
+
+            padding: 20px;
+        }
+        #logo_img{
+            width:100%;
+            border:1px;
+            box-sizing:border-box;
+        }
+        /* Add a card effect for articles */
+        .card {
+
+            background-color: white;
+            padding: 20px;
+            margin-top: 45px;
+            align-content: center;
+
+        }
+        .card1 {
+
+
+        }
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        /* Footer */
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background: #ddd;
+            margin-top: 20px;
+        }
+        /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 800px) {
+            .leftcolumn, .rightcolumn {
+                width: 100%;
+                padding: 0;
+            }
+        }
+        /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+        @media screen and (max-width: 400px) {
+            .topnav a {
+                float: none;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+<div class="whole">
+    <div class="contain-object">
+        <div class="header">
+            <h1>Semi-Permanent Soil Humidity Development Sensor</h1>
+            <h2>Dagu Catolic university</h2>
+            <p>SnSLab</p>
+        </div>
+        <div class="topnav">
+            <ul class="main_menu">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="#">Data Value
+                        <ul class="sub_menu" style="position: absolute">
+                            <li><a href = "{% url 'SEN0114' %}" style="">SEN0114</a></li>
+                            <li><a href = "{% url 'FC_28' %}">FC-28</a></li>
+                            <li><a href = "{% url 'Chopsticks' %}">Chopsticks</a></li>
+                            <li><a href = "{% url 'VacuumChopsticks' %}">VacuumChopsticks</a></li>
+                        </ul>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Graph
+                        <ul class="sub_menu">
+                            <li><a href="{% url 'SenGraph' %}">SEN0114</a></li>
+                            <li><a href="{% url 'FC_28Graph' %}">FC-28</a></li>
+                            <li><a href="{% url 'ChopGraph' %}">Chopsticks</a></li>
+                            <li><a href="{% url 'VacuumGraph' %}">VacuumChopsticks</a></li>
+                        </ul>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <form action="{% url 'Chopsticks' %}" method="get">
+                {% csrf_token %}
+                <input name="date">
+                <button type="submit">검색</button>
+            </form>
+            <div class="leftcolumn">
+                <div class="card card1">
+                    <h2>탐침 기반 센서 부식 실험</h2>
+                    <h5>2020.09.07 ~ 진행중</h5>
+
+                    <img src="/static/img/corrosion_study.jpg" id="script_picture">
+
+                    <h5 style="position:relative">토양습도개발센서</h5>
+                    <p style="position:relative">기존 토양 습도 센서와 개발한 쇠 젓가락 & 진공 젓가락 센서의 부식 내구도 비교 실험
+                        으로 토양의 성질을 이용한 유전율 방식을 사용하고 있다.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2>실험 예정</h2>
+                    <h3>토양 비율에 따른 개발 센서 데이터 값 비교</h3>
+                    <h5>2020.11 예정</h5>
+                    <div class="fakeimg" style="height:200px;"></div>
+                    <div>
+                        <p style="position:relative"></p>
+                        <p style="position:relative">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="rightcolumn">
+                <div class="card card2">
+                    <h3>프로젝트 멤버 소개</h3>
+                    <img src="/static/img/profile.jpg">
+                    <h3>김재훈</h3>
+                    <h4>학교 : 대구 가톨릭대학교</h4>
+                    <h4>전공 : 스마트IoT</h4>
+                </div>
+                <div class="card">
+                    <h3>관련 사이트</h3>
+                    <div>
+                        <a href="http://snslab.cu.ac.kr/">
+                            <img src="/static/img/snslab.png" id="logo_img">
+                        </a>
+                    </div>
+                    <div><a href="http://www.cu.ac.kr/index.php" >
+                        <img src="/static/img/DCU.png" id="logo_img">
+                    </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>논문</h3>
+                    <p>...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h2></h2>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

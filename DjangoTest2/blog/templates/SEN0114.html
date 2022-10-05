@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<head>
+    <title>SEN0114</title>
+    <meta charset = "utf-8">
+    <meta name = "SEN0114" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class ="container">
+ <a href = "{% url 'export_users_xls' %}"> Export Data Value</a>
+    <form action="{% url 'SEN0114' %}" method="get">
+        {% csrf_token %}
+        <input name="date">
+        <button type="submit">검색</button>
+    </form>
+
+    {% if posts.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ posts.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>{{ posts.number }}</span>
+    <span>of</span>
+    <span>{{ posts.paginator.num_pages }}</span>
+
+    {% if posts.has_next %}
+        <a href="?page={{ posts.next_page_number }}">Next</a>
+        <a href="?page={{ posts.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+
+    <table class = "table table-striped">
+        <thead>
+        <tr>
+            <td><B>번호</B></td>
+            <td><B>시간</B></td>
+            <td><B>데이터 값</B></td>
+            <td><B>센서</B></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for HumiditySensor in posts %}
+{#            {%for Sensor in Sensor %}#}
+        <tr>
+            <td>{{ HumiditySensor.s_type }}</td>
+            <td>{{ HumiditySensor.s_date }}</td>
+            <td>{{ HumiditySensor.soil_humi }}</td>
+            <td>{{ HumiditySensor.s_name.s_name }}</td>
+        </tr>
+{#            {% endfor %}#}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if posts.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ posts.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>{{ posts.number }}</span>
+    <span>of</span>
+    <span>{{ posts.paginator.num_pages }}</span>
+
+    {% if posts.has_next %}
+        <a href="?page={{ posts.next_page_number }}">Next</a>
+        <a href="?page={{ posts.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+    <form action="{% url 'SEN0114' %}" method="get">
+        {% csrf_token %}
+        <input name="date">
+        <button type="submit">검색</button>
+    </form>
+</div>
+
+</body>

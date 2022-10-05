@@ -1,0 +1,117 @@
+<!--
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<canvas id="myChart" height="80px"></canvas>
+<a href = "{% url 'export_users_xls' %}"> Export Data Value</a>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        /* labels: ['2020-07-07', '2020-07-08','2020-07-09','2020-07-10','2020-07-11','2020-07-12'],*/
+        labels: {{ date_list|safe }},
+        datasets: [{
+            label: 'Chopsticks values',
+            data: {{ chopsticksGraph }},
+            backgroundColor: [
+                'transparent'
+            ],
+            borderColor: [
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }],
+        options: {
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        max: 5,
+                        min: 0,
+                        stepSize: 0.5
+                    }
+                }]
+            }
+        }
+    }
+});
+
+</script>
+<form action="{% url 'Chopsticks' %}" method="get">
+    {% csrf_token %}
+    <input name="date">
+    <button type="submit">검색</button>
+</form>
+
+{% if posts.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{ posts.previous_page_number }}">Previous</a>
+{% endif %}
+
+<span>{{ posts.number }}</span>
+<span>of</span>
+<span>{{ posts.paginator.num_pages }}</span>
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 다운받은 echarts 파일 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.min.js"></script>
+</head>
+<body>
+<!-- 높이와 너비가 지정된 Dom 을 생성합니다 -->
+<div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // DOM을 준비하고 echart 객체를 만듭니다.
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 차트 속성과 데이터를 지정합니다.
+        option = {
+            xAxis: {
+                type: 'category',
+                data: {{ date_list|safe }}
+
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    data: {{ chopsticksGraph }},
+                    type: 'line',
+                    itemStyle:{
+                        color:'#335AFF'
+                    }
+                },
+                { 
+                    data: {{ VacuumGraph }},
+                    type: 'line',
+                    itemStyle:{
+                        color:'#ff3a3a'
+                    }
+                },
+                {
+                    data: {{ SEN0114Graph }},
+                    type: 'line',
+                    itemStyle:{
+                        color:'#ffd43a'
+                    }
+                },
+                {
+                    data: {{ FC_28Graph }},
+                    type: 'line',
+                    itemStyle:{
+                        color:'#2ae205'
+                    }
+                }
+            ]
+        };
+
+        // 위에서 설정한 속성을 차트에 반영합니다.
+        myChart.setOption(option);
+    </script>
+    </body>
+</html>

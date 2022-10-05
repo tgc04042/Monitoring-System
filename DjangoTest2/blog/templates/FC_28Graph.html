@@ -1,0 +1,94 @@
+<!--
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<canvas id="myChart" height="80px"></canvas>
+<a href = "{% url 'export_users_xls' %}"> Export Data Value</a>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        /* labels: ['2020-07-07', '2020-07-08','2020-07-09','2020-07-10','2020-07-11','2020-07-12'],*/
+        labels: ,
+        datasets: [{
+            label: 'FC-28 values',
+            data: ,
+            backgroundColor: [
+                'transparent'
+            ],
+            borderColor: [
+                'rgba(255, 0, 0, 1)'
+            ],
+        }],
+        options: {
+            responsive: true,
+            title: {
+                display: true
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Value'
+                    }
+                }]
+            }
+        }
+    }
+});
+</script>
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 다운받은 echarts 파일 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.min.js"></script>
+</head>
+<body>
+<!-- 높이와 너비가 지정된 Dom 을 생성합니다 -->
+<div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // DOM을 준비하고 echart 객체를 만듭니다.
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 차트 속성과 데이터를 지정합니다.
+        option = {
+            xAxis: {
+                type: 'category',
+                data: {{ date_list|safe }}
+
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: {{ Fc_28Graph }},
+                type: 'line',
+                itemStyle:{
+                    color:'#F8FF33'
+                }
+            }]
+        };
+
+        // 위에서 설정한 속성을 차트에 반영합니다.
+        myChart.setOption(option);
+    </script>
+    </body>
+</html>
